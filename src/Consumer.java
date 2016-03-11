@@ -1,25 +1,34 @@
+import java.util.NoSuchElementException;
 import java.util.Random;
+import java.util.concurrent.*;
 
 
 public class Consumer implements Runnable {
 
-	Box box;
+	BlockingQueue queue;
 	
-	public Consumer(Box box){
-		this.box = box;
+	public Consumer(BlockingQueue queue){
+		this.queue = queue;
 	}
 	
 	public void run(){
-		String message = null;
+		String message = "";
 		Random rnd = new Random();
-		while(!((message = box.take()).equals("DONE"))){
-			System.out.println(message);
-
+				
+		do{
+			
+			try{
+				message = (String) queue.remove();
+				System.out.println(message);
+			}catch (NoSuchElementException e){}
+			
+			
 			try {
+				
 				Thread.sleep(Math.abs(rnd.nextInt(500)));
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		}
+		}while(!((message).equals("DONE")));
 	}
 }

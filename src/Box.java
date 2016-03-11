@@ -19,8 +19,9 @@ public class Box {
 			}
 		}
 		notifyAll();
+		String msg = message;
 		empty = true;
-		return message;
+		return msg;
 	}
 	
 	public synchronized void put(String message){
@@ -31,8 +32,8 @@ public class Box {
 			} catch (InterruptedException e) {
 			}
 		}
-		empty = false;
 		this.message = message;
+		empty = false;
 		notifyAll();
 
 	}

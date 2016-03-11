@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.concurrent.*;
 
 /**
  * 
@@ -6,10 +7,10 @@ import java.util.Random;
  * @since  10/03/2016; 12:51
  */
 public class Producer implements Runnable {
-	Box box;
+	BlockingQueue queue;
 	
-	public Producer(Box box){
-		this.box = box;
+	public Producer(BlockingQueue queue){
+		this.queue = queue;
 
 	}
 	
@@ -17,7 +18,12 @@ public class Producer implements Runnable {
 		String[] strArray = {"The", "Lazy", "Fox", "Jumps", "Over", "Brown", "Dog"};
 		Random rnd = new Random();
 		for (String str : strArray){
-			box.put(str);
+			try {
+				queue.put(str);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 
 			try {
 
@@ -26,7 +32,12 @@ public class Producer implements Runnable {
 				e.printStackTrace();
 			}
 		}
-		box.put("DONE");
+		try {
+			queue.put("DONE");
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

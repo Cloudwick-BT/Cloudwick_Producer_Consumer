@@ -7,9 +7,9 @@ import java.util.concurrent.*;
  * @since  10/03/2016; 12:51
  */
 public class Producer implements Runnable {
-	BlockingQueue queue;
+	BlockingQueue<String> queue;
 	
-	public Producer(BlockingQueue queue){
+	public Producer(BlockingQueue<String> queue){
 		this.queue = queue;
 
 	}

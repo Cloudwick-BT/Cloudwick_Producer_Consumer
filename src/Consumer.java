@@ -5,9 +5,9 @@ import java.util.concurrent.*;
 
 public class Consumer implements Runnable {
 
-	BlockingQueue queue;
+	BlockingQueue<String> queue;
 	
-	public Consumer(BlockingQueue queue){
+	public Consumer(BlockingQueue<String> queue){
 		this.queue = queue;
 	}
 	

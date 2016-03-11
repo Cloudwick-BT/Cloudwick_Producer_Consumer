@@ -3,8 +3,9 @@ import java.util.LinkedList;
 /**
  * 
  * @author Bhavin Tandel
- * @since  10/03/2016; 12:41
+ * @since  11/03/2016; 10:14
  */
+
 public class Box {
 	private LinkedList<String> messages ;
 	private int queueSize;
